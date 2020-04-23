@@ -31,6 +31,11 @@ class slurm:
                     end_proc = start_proc + int(config[model]["nproc"]) - 1
                 elif "nproca" in config[model] and "nprocb" in config[model]:    
                     end_proc = start_proc + int(config[model]["nproca"])*int(config[model]["nprocb"]) - 1
+
+# kh 12.03.20
+                    if "nprocrad" in config[model]:
+                        if config[model]["nprocrad"] != "remove_from_namelist":
+                            end_proc += config[model]["nprocrad"]
                 else:
                     continue
                 if "execution_command" in config[model]:

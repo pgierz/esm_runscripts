@@ -900,6 +900,11 @@ class SimulationSetup(object):
                     tasks += self.config[model]["nproc"]
                 elif "nproca" in self.config[model] and "nprocb" in self.config[model]:
                     tasks += self.config[model]["nproca"] * self.config[model]["nprocb"]
+
+# kh 10.03.20
+                    if "nprocrad" in self.config[model]:
+                        if self.config[model]["nprocrad"] != "remove_from_namelist":
+                            tasks += self.config[model]["nprocrad"]
         elif self.config["general"]["jobtype"] == "post":
             tasks = 1
         return tasks
