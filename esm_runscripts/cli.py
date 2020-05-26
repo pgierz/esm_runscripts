@@ -84,12 +84,8 @@ def parse_shargs():
     )
 
     parser.add_argument(
-        "-p",
-        "--pid",
-        help="The PID of the task to observe.",
-        default=-666,
+        "-p", "--pid", help="The PID of the task to observe.", default=-666,
     )
-
 
     parser.add_argument("-x", "--exclude", help="e[x]clude this step", default=None)
     parser.add_argument("-o", "--only", help="[o]nly do this step", default=None)
@@ -146,8 +142,7 @@ def main():
     if "task" in parsed_args:
         jobtype = parsed_args["task"]
 
-
-    command_line_config={}
+    command_line_config = {}
     command_line_config["check"] = check
     command_line_config["profile"] = profile
     command_line_config["update"] = update
@@ -160,9 +155,8 @@ def main():
     command_line_config["original_command"] = original_command.strip()
     command_line_config["started_from"] = os.getcwd()
 
-
-    print ("Started from: ", command_line_config["started_from"])
-    print ("starting : ", jobtype)
+    print("Started from: ", command_line_config["started_from"])
+    print("starting : ", jobtype)
 
     Setup = SimulationSetup(command_line_config)
     Setup()

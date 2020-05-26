@@ -1,7 +1,7 @@
 """Top-level package for ESM Runscripts."""
 
 __author__ = """Dirk Barbi"""
-__email__ = 'dirk.barbi@awi.de'
+__email__ = "dirk.barbi@awi.de"
 __version__ = "4.0.2"
 
 from .esm_sim_objects import *
