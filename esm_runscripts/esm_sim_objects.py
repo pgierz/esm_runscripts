@@ -1,31 +1,27 @@
 """
 Documentation goes here
 """
-from datetime import datetime
-from io import StringIO
 import collections
 import logging
 import os
 import pdb
+import pprint
 import shutil
 import sys
+import time
+from datetime import datetime
+from io import StringIO
 
 import f90nml
 import six
 import tqdm
 import yaml
-import time
-
-
-from esm_calendar import Date, Calendar
-import esm_parser
-from . import esm_coupler
-from . import esm_methods
-
-# import .esm_coupler
+from esm_calendar import Calendar, Date
 from esm_profile import *
 
-import pprint
+import esm_parser
+
+from . import esm_coupler, esm_methods
 
 pp = pprint.PrettyPrinter(indent=4)
 

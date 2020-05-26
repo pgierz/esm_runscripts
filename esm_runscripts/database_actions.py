@@ -1,5 +1,6 @@
-from . import database
 from datetime import datetime
+
+from . import database
 
 
 def database_entry(config):

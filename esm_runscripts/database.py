@@ -1,21 +1,22 @@
-from sqlalchemy import create_engine, Column, Integer, String, Sequence, DateTime
+import os
+
+from esm_database import location_database
+from sqlalchemy import (Column, DateTime, Integer, Sequence, String,
+                        create_engine)
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-
-import os
 
 # database_file = os.path.dirname(os.path.abspath(__file__)) + "/../database/esm_runscripts.db"
 database_file = os.path.expanduser("~") + "/.esm_tools/esm_runscripts.db"
 if not os.path.isdir(os.path.expanduser("~") + "/.esm_tools"):
     os.mkdir(os.path.expanduser("~") + "/.esm_tools")
 
-from esm_database import location_database
 
 engine = create_engine("sqlite:///" + database_file, echo=False)
 base = declarative_base()
 
 
-class experiment(base):
+class Experiment(base):
     __tablename__ = "experiment"
 
     id = Column(Integer, Sequence("user_id_seq"), primary_key=True)

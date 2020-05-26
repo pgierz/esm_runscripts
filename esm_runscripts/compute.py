@@ -1,11 +1,18 @@
-from . import jobclass
+import os
+import shutil
+
+import esm_rcfile
+import six
+import yaml
+
+from . import esm_batch_system, jobclass, namelist
 
 #########################################################################################
 #                                   compute jobs                                        #
 #########################################################################################
 
 
-class compute(jobclass.jobclass):
+class Compute(jobclass.Jobclass):
     def __init__(self, config):
 
         self.relevant_files = ["bin", "config", "forcing", "input", "restart_in"]
@@ -15,7 +22,6 @@ class compute(jobclass.jobclass):
 
     @staticmethod
     def add_batch_hostfile(config):
-        from . import esm_batch_system
 
         self = config["general"]["jobclass"]
         config["general"]["batch"].calc_requirements(config)
@@ -89,8 +95,6 @@ class compute(jobclass.jobclass):
 
     @staticmethod
     def modify_namelists(config):
-        from . import namelist
-        import six
 
         # Load and modify namelists:
         six.print_("\n" "- Setting up namelists for this run...")
@@ -104,7 +108,6 @@ class compute(jobclass.jobclass):
         return config
 
     def copy_files_to_thisrun(config):
-        import six
 
         self = config["general"]["jobclass"]
         six.print_("=" * 80, "\n")
@@ -122,7 +125,6 @@ class compute(jobclass.jobclass):
         return config
 
     def copy_files_to_work(config):
-        import six
 
         self = config["general"]["jobclass"]
         six.print_("=" * 80, "\n")
@@ -134,7 +136,6 @@ class compute(jobclass.jobclass):
 
     @staticmethod
     def _create_folders(config, filetypes):
-        import os
 
         for filetype in filetypes:
             if not filetype == "ignore":
@@ -189,7 +190,6 @@ class compute(jobclass.jobclass):
             the general configuration is set to 1, and a file exists for
             ``general.exp_log_file``; this file is removed; and re-initialized.
         """
-        import os
 
         if config["general"]["run_number"] == 1:
             if os.path.isfile(config["general"]["experiment_log_file"]):
@@ -214,7 +214,6 @@ class compute(jobclass.jobclass):
 
     @staticmethod
     def _write_finalized_config(config):
-        import yaml
 
         with open(
             config["general"]["thisrun_config_dir"]
@@ -228,9 +227,6 @@ class compute(jobclass.jobclass):
 
     @staticmethod
     def copy_tools_to_thisrun(config):
-        import os
-        import shutil
-        import esm_rcfile
 
         gconfig = config["general"]
 
@@ -287,8 +283,6 @@ class compute(jobclass.jobclass):
 
     @staticmethod
     def _copy_preliminary_files_from_experiment_to_thisrun(config):
-        import os
-        import shutil
 
         filelist = [
             (
@@ -318,7 +312,6 @@ class compute(jobclass.jobclass):
 
     @staticmethod
     def _show_simulation_info(config):
-        import six
 
         six.print_(80 * "=")
         six.print_("STARTING SIMULATION JOB!")
